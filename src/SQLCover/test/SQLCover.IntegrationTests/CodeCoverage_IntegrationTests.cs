@@ -1,8 +1,9 @@
 ﻿using System;
-using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 using NUnit.Framework;
 using TestLib;
 using System.Threading;
+using NUnit.Framework.Legacy;
 
 namespace SQLCover.IntegrationTests
 {
@@ -17,7 +18,7 @@ namespace SQLCover.IntegrationTests
             var coverage = new CodeCoverage(ConnectionStringReader.GetIntegration(), TestDatabaseName, null, true, false);
             var results = coverage.Cover("select 1");
 
-            Assert.IsNotNull(results);
+            ClassicAssert.IsNotNull(results);
 
             Console.WriteLine(results.RawXml());
         }
@@ -39,8 +40,8 @@ namespace SQLCover.IntegrationTests
 
             var result = coverage.Stop();
 
-            Assert.IsFalse(result.RawXml().Contains("HitCount=\"1\""));
-            Assert.IsFalse(result.RawXml().Contains("a_procedure"));
+            ClassicAssert.IsFalse(result.RawXml().Contains("HitCount=\"1\""));
+            ClassicAssert.IsFalse(result.RawXml().Contains("a_procedure"));
         }
 
         [Test]
@@ -146,7 +147,7 @@ namespace SQLCover.IntegrationTests
 
             var result = coverage.Stop();
 
-            Assert.AreEqual(5, result.CoveredStatementCount);   //not sure why SET QUOTED_IDENTIFIER ON is not covered - don't get xevent on 2008
+            ClassicAssert.AreEqual(5, result.CoveredStatementCount);   //not sure why SET QUOTED_IDENTIFIER ON is not covered - don't get xevent on 2008
         }
 
         [Test]
@@ -166,7 +167,7 @@ namespace SQLCover.IntegrationTests
             }
 
             var result = coverage.Stop();
-            Assert.IsFalse(result.Html().Contains("a_view"));
+            ClassicAssert.IsFalse(result.Html().Contains("a_view"));
         }
     }
 }

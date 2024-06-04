@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Moq;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 using SQLCover.Gateway;
 using SQLCover.Source;
 using SqlServerVersion = SQLCover.Objects.SqlServerVersion;
@@ -25,7 +26,7 @@ namespace SQLCover.UnitTests.Source
         {
             var gateway = GetGateway(expected);
             var source = new DatabaseSourceGateway(gateway.Object);
-            Assert.AreEqual(expected, source.GetVersion());
+            ClassicAssert.AreEqual(expected, source.GetVersion());
         }
 
         private Mock<DatabaseGateway> GetGateway(SqlServerVersion expected)

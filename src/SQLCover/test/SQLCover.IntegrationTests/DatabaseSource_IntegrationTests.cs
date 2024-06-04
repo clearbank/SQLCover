@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Runtime.Remoting;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 using SQLCover.Gateway;
 using SQLCover.Source;
 using TestLib;
@@ -24,11 +25,11 @@ namespace SQLCover.IntegrationTests
             var source = new DatabaseSourceGateway(databaseGateway);
             var batches = source.GetBatches(null);
 
-            Assert.AreEqual(6, batches.Count());
+            ClassicAssert.AreEqual(6, batches.Count());
 
             var proc = batches.FirstOrDefault(p => p.ObjectName == "[dbo].[a_procedure]");
 
-            Assert.IsNotNull(proc);
+            ClassicAssert.IsNotNull(proc);
         }
 
         [Test]
@@ -39,11 +40,11 @@ namespace SQLCover.IntegrationTests
             var source = new DatabaseSourceGateway(databaseGateway);
             var batches = source.GetBatches(null);
 
-            Assert.AreEqual(6, batches.Count());
+            ClassicAssert.AreEqual(6, batches.Count());
 
             var proc = batches.FirstOrDefault(p => p.ObjectName == "[dbo].[a_large_procedure]");
-            
-            Assert.AreEqual(2, proc.StatementCount);
+
+            ClassicAssert.AreEqual(2, proc.StatementCount);
         }
 
 
@@ -92,7 +93,7 @@ begin
 end", 15);
             var source = new DatabaseSourceGateway(databaseGateway);
             var warnings = source.GetWarnings();
-            Assert.IsTrue(
+            ClassicAssert.IsTrue(
                 warnings.Contains("enc")
                 );
 
