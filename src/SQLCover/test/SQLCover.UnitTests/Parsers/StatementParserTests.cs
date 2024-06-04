@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.SqlServer.TransactSql.ScriptDom;
+﻿using System.Linq;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 using SQLCover.Parsers;
 using SqlServerVersion = SQLCover.Objects.SqlServerVersion;
 
@@ -20,8 +16,8 @@ namespace SQLCover.UnitTests.Parsers
             var parser = new StatementParser(SqlServerVersion.Sql120);
             var statements = parser.GetChildStatements(query, false);
 
-            Assert.AreEqual(1, statements.Count);
-            Assert.AreEqual(query, statements.First().Text);
+            ClassicAssert.AreEqual(1, statements.Count);
+            ClassicAssert.AreEqual(query, statements.First().Text);
         }
 
         [Test]
@@ -31,7 +27,7 @@ namespace SQLCover.UnitTests.Parsers
             var parser = new StatementParser(SqlServerVersion.Sql120);
             var statements = parser.GetChildStatements(query, false);
 
-            Assert.AreEqual(1, statements.Count);
+            ClassicAssert.AreEqual(1, statements.Count);
         }
 
         [Test]
@@ -41,7 +37,7 @@ namespace SQLCover.UnitTests.Parsers
             var parser = new StatementParser(SqlServerVersion.Sql120);
             var statements = parser.GetChildStatements(query, false);
 
-            Assert.AreEqual(1, statements.Count);
+            ClassicAssert.AreEqual(1, statements.Count);
         }
 
 
@@ -52,7 +48,7 @@ namespace SQLCover.UnitTests.Parsers
             var parser = new StatementParser(SqlServerVersion.Sql120);
             var statements = parser.GetChildStatements(query, false);
 
-            Assert.IsNotNull(statements.FirstOrDefault(p=>p.Text == "if\t   \t1 = 1"));
+            ClassicAssert.IsNotNull(statements.FirstOrDefault(p=>p.Text == "if\t   \t1 = 1"));
         }
 
         [Test]
@@ -62,7 +58,7 @@ namespace SQLCover.UnitTests.Parsers
             var parser = new StatementParser(SqlServerVersion.Sql120);
             var statements = parser.GetChildStatements(query, false);
 
-            Assert.IsNotNull(statements.FirstOrDefault(p => p.Text == "select 1;"));
+            ClassicAssert.IsNotNull(statements.FirstOrDefault(p => p.Text == "select 1;"));
         }
 
         [Test]
@@ -72,7 +68,7 @@ namespace SQLCover.UnitTests.Parsers
             var parser = new StatementParser(SqlServerVersion.Sql120);
             var statements = parser.GetChildStatements(query, false);
 
-            Assert.IsNotNull(statements.FirstOrDefault(p => p.Text == "select 99;"));
+            ClassicAssert.IsNotNull(statements.FirstOrDefault(p => p.Text == "select 99;"));
         }
 
         [Test]
@@ -89,7 +85,7 @@ as while		1 = 1 begin
             var parser = new StatementParser(SqlServerVersion.Sql120);
             var statements = parser.GetChildStatements(query, false);
 
-            Assert.IsNotNull(statements.FirstOrDefault(p => p.Text == "while		1 = 1"));
+            ClassicAssert.IsNotNull(statements.FirstOrDefault(p => p.Text == "while		1 = 1"));
         }
     }
 }

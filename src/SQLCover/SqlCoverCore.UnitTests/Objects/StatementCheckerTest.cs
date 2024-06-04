@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 using SQLCover.Objects;
 
 namespace SQLCover.UnitTests.Objects
@@ -24,7 +25,7 @@ namespace SQLCover.UnitTests.Objects
             };
 
             var checker = new StatementChecker();
-            Assert.IsTrue(checker.Overlaps(statement, coveredStatement));
+            ClassicAssert.IsTrue(checker.Overlaps(statement, coveredStatement));
         }
 
         [Test]
@@ -40,7 +41,7 @@ namespace SQLCover.UnitTests.Objects
             };
 
             var checker = new StatementChecker();
-            Assert.IsTrue(checker.Overlaps(statement, coveredStatement));
+            ClassicAssert.IsTrue(checker.Overlaps(statement, coveredStatement));
         }
 
         [Test]
@@ -57,7 +58,7 @@ namespace SQLCover.UnitTests.Objects
             };
 
             var checker = new StatementChecker();
-            Assert.IsFalse(checker.Overlaps(statement, coveredStatement));
+            ClassicAssert.IsFalse(checker.Overlaps(statement, coveredStatement));
 
 
         }
@@ -77,7 +78,7 @@ namespace SQLCover.UnitTests.Objects
             };
 
             var checker = new StatementChecker();
-            Assert.IsFalse(checker.Overlaps(statement, coveredStatement));
+            ClassicAssert.IsFalse(checker.Overlaps(statement, coveredStatement));
 
 
         }
